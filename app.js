@@ -7,8 +7,11 @@ app.use(bp.json());
 const dotenv = require('dotenv');
 dotenv.config();
 
-// const cors = require('cors');
-// app.use(cors());
+const cors = require('cors');
+app.use(cors({
+    origin:"http://52.66.153.80",
+    methods: ['GET','POST']
+}));
 
 const path = require('path');
 app.use(express.static(path.join(__dirname,'public')));
