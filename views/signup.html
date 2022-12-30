@@ -8,11 +8,11 @@
     <style>
         *{
             box-sizing: border-box;
-            background-color: rgb(2, 74, 50);
+            background-color: rgb(16, 51, 37);
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         }
         header{
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-            padding-left: 2vw;
+              padding-left: 2vw;
             padding-top: 2vh;
             font-size: 4vh;
             color: white;
@@ -20,26 +20,50 @@
         form {
             display: flex;
             flex-direction: column;
-            width: 35vw;
-            justify-content: center;
             align-items: center;
-            margin: 10vh auto;
+            width: 28vw;
+            height: 50vh;
+            padding: 10px;
+            margin: 0;
+            background-color: white;
+            position: relative;
+            left: 38%;
+            border-radius: 2vw;
         }
         form input,form button{
             margin: 2vh;
             height: 4vh;
-            width: 30vw;
+            width: 20vw;
             font-size: 2.6vh;
             border-radius: 0.7vh;
             background-color: white;
-        }
+              }
         form button{
-            width: 20vw;
+            width: 15vw;
+            height: 5vh;
         }
-        form button:hover{
+        form button:hover,#login:hover{
             background-color: rgb(2, 74, 50);
             color: white;
             border-color: white;
+        }
+        form p{
+            background-color: white;
+            color: rgb(2, 74, 50);
+            font-size: 5vh;
+            margin: 0;
+             
+        }
+        #login{
+            width: 8vw;
+            height: 5vh; 
+            background-color: white;
+            color: rgb(2, 74, 50);
+            position: absolute;
+            left: 90%;
+            top: 7%;
+            border-radius: 1.8vw;
+            font-size: 3vh;
         }
     </style>
 </head>
@@ -47,7 +71,9 @@
     <header>
         <h1>GROUP CHAT</h1>
     </header>
+    <button name="login" id="login">LOGIN</button>
    <form>
+    <p> SIGN UP</p>
     <input type="hidden" name="error" id="error" >
     <input type="text" id="name" name="name" placeholder="Name">
     <input type="text" name="mail" id="mail" placeholder="E-Mail">
@@ -56,5 +82,7 @@
     <button name="submit" id="submit">SUBMIT</button>
    </form>
    <script src="../public/js/signup.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+       
 </body>
 </html>
