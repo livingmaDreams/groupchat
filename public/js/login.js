@@ -8,7 +8,7 @@ function postLogin(event){
 
     const obj={mail,password};
 
-    axios.post('http://52.66.153.80/signup',obj)
+    axios.post('http://52.66.153.80/login',obj)
     .then(res => {
         const token = res.data.token;
         if(res.status == 200)
