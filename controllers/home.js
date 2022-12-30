@@ -11,9 +11,11 @@ exports.getAllUsers = async (req,res,next) =>{
     const user=[];
     const obj = {};
   const userList = await User.findAll({where:{active:'true'}});
+  console.log(userList)
   for(let list of userList)
    {
     const msg = await list.getMessages();
+    console.log(msg)
     obj[list.name] = msg;
     user.push(obj);
    }

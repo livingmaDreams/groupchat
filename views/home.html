@@ -24,20 +24,20 @@
             margin: auto;
             border-radius: 2vh;
         }
+        #home-input{
+            margin: 2vh;
+            text-align: center;
+            
+        }
         #message{
-            position: relative;
-            top:90%;
-            left: 5%;
-            width: 30vw;
+            width: 35vw;
             background-color: white;
-            height: 4vh;
+            height: 4.2vh;
             font-size: 2.5vh;
             border-radius: 0.5vw;
+            
         }
         #send{
-            position: relative;
-            top:90%;
-            left: 6%;
             width: 5vw;  
             background-color: white;
             height: 4vh;
@@ -63,6 +63,12 @@
             text-decoration: none;
             padding: 1vh;
         }
+        #user-messages-list{
+            background-color: white;
+            color: rgb(2, 74, 50);
+            margin: 0.5vh;
+            font-size: 2vh;
+        }
     </style>
 </head>
 <body>
@@ -71,10 +77,12 @@
     </header>
     <a href="http://52.66.153.80/login" id="logout">Logout</a>
     <div id="chat-room">
-        <div id="user-messages"></div>
-        <input type="text" name="message" id="message" placeholder="message">
-        <button id="send" name="send">SEND</button>
+        <div id="user-messages"></div>    
     </div>
+    <div id="home-input">
+    <input type="text" name="message" id="message" placeholder="message">
+    <button id="send" name="send">SEND</button>
+     </div>
     <script src="/js/home.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
