@@ -4,8 +4,8 @@ const app = express();
 const bp = require('body-parser');
 app.use(bp.json());
 
-// const dotenv = require('dotenv');
-// dotenv.config();
+const dotenv = require('dotenv');
+dotenv.config();
 
 // const cors = require('cors');
 // app.use(cors());
@@ -23,4 +23,14 @@ app.use(express.static(path.join(__dirname,'public')));
 const signUpRouter = require('./routes/signup');
 app.use('/signup',signUpRouter);
 
-app.listen(3000);
+
+const User = require('./models/user');
+
+
+const sequelize = require('./util/database');
+
+sequelize
+.sync()
+.then(()=> app.listen(3000))
+.catch(err => console.log(err));
+

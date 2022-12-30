@@ -22,7 +22,7 @@
             flex-direction: column;
             align-items: center;
             width: 28vw;
-            height: 50vh;
+            height: 60vh;
             padding: 10px;
             margin: 0;
             background-color: white;
@@ -55,7 +55,7 @@
              
         }
         #login{
-            width: 8vw;
+            width: 6vw;
             height: 5vh; 
             background-color: white;
             color: rgb(2, 74, 50);
@@ -64,6 +64,16 @@
             top: 7%;
             border-radius: 1.8vw;
             font-size: 3vh;
+            text-align: center;
+            text-decoration: none;
+            padding: 1vh;
+        }
+        #error{
+            color: red;
+            display: block;
+            border: none;
+            padding: 2vh;
+            text-align: center;
         }
     </style>
 </head>
@@ -71,17 +81,17 @@
     <header>
         <h1>GROUP CHAT</h1>
     </header>
-    <button name="login" id="login">LOGIN</button>
-   <form>
+    <a href="http://52.66.153.80:3000/login" id="login">LOGIN</a>
+   <form id="form-signUpPage">
     <p> SIGN UP</p>
-    <input type="hidden" name="error" id="error" >
+    <input type="text" name="error" id="error">
     <input type="text" id="name" name="name" placeholder="Name">
     <input type="text" name="mail" id="mail" placeholder="E-Mail">
     <input type="tel" name="phone" id="phone" placeholder="Phone Number">
     <input type="password" name="password" id="password" placeholder="Password">
     <button name="submit" id="submit">SUBMIT</button>
    </form>
-   <script src="../public/js/signup.js"></script>
+   <script src="/js/signup.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
        
 </body>
