@@ -17,8 +17,8 @@ axios.post('http://52.66.153.80/home/users',obj,{ headers:{"Authorization":token
   const message = res.data.message;
   const div = document.createElement('div');
   div.id = 'user-messages-list';
-  div.innerHTML = `<span>${Me}</span><span>${message}</span>`;
-  document.getElementById('user-messages').appendChild(div);
+  div.innerHTML = `<span>Me:</span><span>${message}</span>`;
+  document.getElementById('chat-room').appendChild(div);
 })
 .catch(err => console.log(err));
 
