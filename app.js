@@ -38,7 +38,7 @@ const User = require('./models/user');
 const sequelize = require('./util/database');
 
 sequelize
-.sync()
+.sync({force:true})
 .then(()=> app.listen(3000))
 .catch(err => console.log(err));
 

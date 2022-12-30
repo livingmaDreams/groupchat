@@ -21,7 +21,8 @@ exports.postSignUp = (req,res,next) =>{
                     name:name,
                     mail: mail,
                     phone:phone,
-                    password:hash                    
+                    password:hash ,
+                    active:'false'                  
                 }
             })
 

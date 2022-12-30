@@ -24,6 +24,9 @@ const User = sequelize.define('user',{
     phone:{
         type:Sequelize.INTEGER,
         allowNull:false
+     },
+     active:{
+        type: Sequelize.STRING
      }
 });
 

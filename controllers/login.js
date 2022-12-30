@@ -21,13 +21,16 @@ exports.postLogin = async (req,res,next) => {
 try{
     const data = await User.findAll({where:{mail:mail}});
     
-    bcrypt.compare(password,data[0].password,(err,result)=>{
+    bcrypt.compare(password,data[0].password,async (err,result)=>{
            if(err)
               res.status(500).json({loginStatus:'something went wrong'});
             if(result === false)
             res.status(401).json({loginStatus:'wrongpassword'});
-            else
-            res.status(200).json({LoginStatus:'userfound',token: generateToken(data[0].id)});
+            else{
+              await data[0].update({active:'true'});
+              res.status(200).json({LoginStatus:'userfound',token: generateToken(data[0].id)});
+            }
+            
         })        
       }
     catch(err){
