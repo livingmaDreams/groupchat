@@ -16,16 +16,17 @@ function postLogin(event){
         window.location.href='http://52.66.153.80/home';
     })
     .catch(err =>{
-        if(err.response.status == 404)
-        error.value="*User not found*"
+        if(err.response.status == 404){
+            document.getElementById('error').value="*User not found*"
+        }
         else if(err.response.status == 401)
-        error.value="*Wrong password*"
+        document.getElementById('error').value="*Wrong password*"
         else
-        error.value="*Something went wrong*"
+        document.getElementById('error').value="*Something went wrong*"
     })
     document.getElementById('mail').value='';
     document.getElementById('password').value='';
      setTimeout(()=>{
-      error.value = '';
+        document.getElementById('error').value = '';
      },2000);
 }
