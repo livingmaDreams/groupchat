@@ -13,7 +13,7 @@ function generateToken(id){
     return jwt.sign({userid:id},process.env.JWT_TOKEN);
 }
 
-exports.postLogin = (req,res,next) => {
+exports.postLogin = async (req,res,next) => {
 
     const mail = req.body.mail;
     const password = req.body.password;
