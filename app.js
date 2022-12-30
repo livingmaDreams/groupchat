@@ -29,6 +29,9 @@ app.use('/signup',signUpRouter);
 const loginRouter = require('./routes/login');
 app.use('/login',loginRouter);
 
+const homeRouter = require('./routes/home');
+app.use('/home',homeRouter);
+
 const User = require('./models/user');
 
 
