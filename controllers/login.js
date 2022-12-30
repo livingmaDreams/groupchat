@@ -1,7 +1,7 @@
 const path = require('path');
 
 
-exports.getLoginPage = (req,res,next){
+exports.getLoginPage = (req,res,next) => {
   res.status(200).sendFile(path.join(__dirname,'../views/login.html'));
 };
 
@@ -13,7 +13,7 @@ function generateToken(id){
     return jwt.sign({userid:id},process.env.JWT_TOKEN);
 }
 
-exports.postLogin = (req,res,next){
+exports.postLogin = (req,res,next) => {
 
     const mail = req.body.mail;
     const password = req.body.password;
