@@ -26,6 +26,8 @@ app.use(express.static(path.join(__dirname,'public')));
 const signUpRouter = require('./routes/signup');
 app.use('/signup',signUpRouter);
 
+const loginRouter = require('./routes/login');
+app.use('/login',loginRouter);
 
 const User = require('./models/user');
 
