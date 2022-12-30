@@ -6,7 +6,6 @@ exports.getHomePage = (req,res,next) => {
 };
 
 const User = require('../models/user');
-const Message = require('./models/message');
 
 exports.getAllUsers = async (req,res,next) =>{
     const user=[];
@@ -28,6 +27,6 @@ exports.postMessage = (req,res,next) =>{
 
   req.user
   .createMessage({message:msg})
-  .then(data => res.status(200).json({status:data}))
-  .catch(err => console.log(err));
+  .then(data => res.status(200).json({status:'success',message: data.message}))
+  .catch(err => res.status(500).json({status:'failure'}));
 }
