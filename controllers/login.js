@@ -20,8 +20,9 @@ exports.postLogin = async (req,res,next) => {
 
 try{
     const data = await User.findAll({where:{mail:mail}});
+    
     bcrypt.compare(password,data[0].password,(err,result)=>{
-        if(err)
+           if(err)
               res.status(500).json({loginStatus:'something went wrong'});
             if(result === false)
             res.status(401).json({loginStatus:'wrongpassword'});
