@@ -33,7 +33,10 @@ const homeRouter = require('./routes/home');
 app.use('/home',homeRouter);
 
 const User = require('./models/user');
+const Message = require('./models/message');
 
+User.hasMany(Message);
+Message.belongsTo(User);
 
 const sequelize = require('./util/database');
 
