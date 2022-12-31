@@ -3,16 +3,19 @@ window.addEventListener('DOMContentLoaded',getUsers);
 async function getUsers(){
   
     try{
-      const res= await axios.get('http://localhost:3000/home/users');
-      const users = res.data.users;
-      for(let i of users)
-      printMessages(`${i}   `,'joined');
-      const msg = res.data.message;
-      for(let i in msg){
-        const totalMsg = msg[i].length;
-        for(let j of msg[i])
-        printMessages(`${i} : `, j)
-      }
+      setInterval(async ()=> {
+        document.getElementById('chat-room').innerHTML='';
+        const res = await axios.get('http://localhost:3000/home/users');
+        const users = res.data.users;
+        for(let i of users)
+        printMessages(`${i}   `,'joined');
+        const msg = res.data.message;
+        for(let i in msg){
+          for(let j of msg[i])
+          printMessages(`${i} : `, j)
+        }
+      },1000);
+     
       }
     catch(err){ console.log(err)};
   
@@ -27,6 +30,7 @@ const obj ={msg};
 axios.post('http://localhost:3000/home/users',obj,{ headers:{"Authorization":token}})
 .then(res => {
   printMessages(`${res.data.name} : `,res.data.message);
+  document.getElementById('message').value = '';
 })
 .catch(err => console.log(err));
 }
@@ -36,7 +40,6 @@ function printMessages(name,message){
   div.id = 'user-messages-list';
   div.innerHTML = `<span>${name}</span><span>${message}</span>`;
   document.getElementById('chat-room').appendChild(div);
-  document.getElementById('message').value = '';
 }
 
 document.getElementById('logout').addEventListener('click',logOut);
