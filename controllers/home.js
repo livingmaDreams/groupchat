@@ -6,34 +6,37 @@ exports.getHomePage = (req,res,next) => {
 };
 
 const User = require('../models/user');
+const Message = require('../models/message');
+const { Op } = require("sequelize");
 
 exports.getAllUsers = async (req,res,next) =>{
-  const userList = await User.findAll({where:{active:'true'}});
-  const activeUser = await activeUsers(userList);
-  const allUser = await User.findAll();
-  const msg = await getMessageFromUsers(allUser);
-  res.status(200).json({users: activeUser,message: msg});
+  let msgId = req.body.msgCount;
+  const data = await Message.findAll({
+    where:{
+      id:{
+        [Op.gt]:msgId
+      }
+    }
+  });
+  if(data != ''){
+    msgId = data[data.length-1].id;
+    const msg=[];
+    for(let i of data)
+    {
+      const obj={};
+      const user = await User.findOne({where:{id:i.userId}});
+      obj.name = user.name;
+      obj.message= i.message;
+      msg.push(obj);
+    }
+    res.status(200).json({message: msg,msgCount: msgId});
+  }
+  else{
+    res.status(200).json({message: '',msgCount: msgId});
+  }
+    
 };
 
-async function getMessageFromUsers(users){
-  const user={};
-  for(let list of users)
-  {
-   const obj = [];
-   const msg = await list.getMessages();
-   for(let i of msg)
-   obj.push(i.message);
-   user[list.name] = obj;
-  }
-  return user;
-}
-
-async function activeUsers(userList){
- const users = [];
- for(let list of userList)
- users.push(list.name);
- return users;
-}
 
 exports.postMessage = (req,res,next) =>{
   

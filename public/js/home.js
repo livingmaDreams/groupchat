@@ -1,24 +1,18 @@
 window.addEventListener('DOMContentLoaded',getUsers);
 
-async function getUsers(){
-  
-    try{
-      setInterval(async ()=> {
-        document.getElementById('chat-room').innerHTML='';
-        const res = await axios.get('http://localhost:3000/home/users');
-        const users = res.data.users;
-        for(let i of users)
-        printMessages(`${i}   `,'joined');
-        const msg = res.data.message;
-        for(let i in msg){
-          for(let j of msg[i])
-          printMessages(`${i} : `, j)
-        }
-      },1000);
-     
-      }
-    catch(err){ console.log(err)};
-  
+
+function getUsers(){
+        let msgCount= 0;
+      setInterval(()=> {
+         axios.post('http://localhost:3000/home/usersall',{msgCount})
+        .then(res =>{
+          const users = res.data.message;
+          msgCount = res.data.msgCount;
+            for(let i of users)
+            printMessages(`${i.name} : `,i.message);
+        })
+        .catch(err => console.log(err));
+        },500);
 }
 
 document.getElementById('send').addEventListener('click',postMessage);
@@ -29,7 +23,7 @@ const token = localStorage.getItem('groupChat');
 const obj ={msg};
 axios.post('http://localhost:3000/home/users',obj,{ headers:{"Authorization":token}})
 .then(res => {
-  printMessages(`${res.data.name} : `,res.data.message);
+  //printMessages(`${res.data.name} : `,res.data.message);
   document.getElementById('message').value = '';
 })
 .catch(err => console.log(err));
