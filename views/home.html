@@ -58,13 +58,13 @@
             left: 93%;
             top: 3%;
             border-radius: 1.8vw;
-            font-size: 3vh;
-            text-align: center;
+            font-size: 2.5vh;
             text-decoration: none;
-            padding: 1vh;
         }
         #chat-room{
             padding: 1vh;
+            overflow-y:scroll;
+            position: sticky;
         }
         #user-messages-list{
             margin: 1vh;
@@ -82,7 +82,7 @@
     <header>
         <h1>Welcome</h1>
     </header>
-    <a href="http://52.66.153.80/login" id="logout">Logout</a>
+    <button id="logout">Logout</button>
     <div id="chat-room">   
     </div>
     <div id="home-input">

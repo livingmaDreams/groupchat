@@ -8,12 +8,12 @@ function postLogin(event){
 
     const obj={mail,password};
 
-    axios.post('http://52.66.153.80/login',obj)
+    axios.post('http://localhost:3000/login',obj)
     .then(res => {
         const token = res.data.token;
         if(res.status == 200)
         localStorage.setItem('groupChat',token);
-        window.location.href='http://52.66.153.80/home';
+        window.location.href='http://localhost:3000/home';
     })
     .catch(err =>{
         if(err.response.status == 404){

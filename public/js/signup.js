@@ -12,19 +12,19 @@ function postSignUp(event){
 
     const obj = {name,mail,phone,password};
 
-    axios.post('http://52.66.153.80/signup',obj)
+    axios.post('http://localhost:3000/signup',obj)
     .then(res => {
         if(res.status == 200)
          {
-            error.value="*User already exists*"
+            document.getElementById('error').value="*User already exists*"
           
          }else if(res.status == 201){
-            error.value="*NewUser created successfully*"    
+            document.getElementById('error').value="*NewUser created successfully*"    
     }
    })
     .catch(err => {
       if(err.response.status == 500){
-         error.value="*Something went wrong*"
+         document.getElementById('error').value="*Something went wrong*"
         }
     });
     document.getElementById('name').value ='';
@@ -33,6 +33,6 @@ function postSignUp(event){
     document.getElementById('password').value='';
 
  setTimeout(()=>{
-    error.value = '';
+   document.getElementById('error').value = '';
    },2000);
 }
