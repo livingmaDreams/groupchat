@@ -33,10 +33,18 @@ const homeRouter = require('./routes/home');
 app.use('/home',homeRouter);
 
 const User = require('./models/user');
+const Member = require('./models/member');
+const Group = require('./models/group');
 const Message = require('./models/message');
 
-User.hasMany(Message);
+User.belongsToMany(Group,{ through: Member});
+Group.belongsToMany(User,{through: Member});
+
 Message.belongsTo(User);
+User.hasMany(Message);
+
+Message.belongsTo(Group)
+Group.hasMany(Message);
 
 const sequelize = require('./util/database');
 

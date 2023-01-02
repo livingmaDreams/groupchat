@@ -28,7 +28,7 @@ try{
             res.status(401).json({loginStatus:'wrongpassword'});
             else{
               await data[0].update({active:'true'});
-              res.status(200).json({LoginStatus:'userfound',token: generateToken(data[0].id)});
+              res.status(200).json({LoginStatus:'userfound',token: generateToken(data[0].id),userName: data[0].name});
             }
             
         })        

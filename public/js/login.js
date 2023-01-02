@@ -11,8 +11,10 @@ function postLogin(event){
     axios.post('http://localhost:3000/login',obj)
     .then(res => {
         const token = res.data.token;
-        if(res.status == 200)
-        localStorage.setItem('groupChat',token);
+        const name = res.data.userName;
+         localStorage.setItem('groupChat',token);
+         localStorage.setItem('groupChatName',name);
+        
         window.location.href='http://localhost:3000/home';
     })
     .catch(err =>{
