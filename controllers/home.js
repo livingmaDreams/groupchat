@@ -28,8 +28,12 @@ exports.getGroups = (req,res,next) =>{
   req.user
   .getGroups()
   .then(grp =>{
-    for(let i of grp)
-    group.push(i.name)
+    for(let i of grp){
+      const obj = {};
+      obj.admin = i.member.admin;
+      obj.name = i.name
+      group.push(obj);
+    }
     res.status(200).json({groups:group})
   })
   .catch(err => console.log(err))
@@ -84,17 +88,73 @@ exports.createGroup = async (req,res,next) =>{
  const id = req.user.id;
  const usr = req.body.user;
 try{
-const grp = await req.user.createGroup({name:grpName,createdby:id},{through:{admin:'true',message:'joined'}});
+const grp = await req.user.createGroup({name:grpName,createdby:id},{through:{admin:'true'}});
 
 for(let i of usr){
   const usr = await User.findOne({where:{name:i}})
    await grp.addUser(usr,{through:{admin:'false'}})
 }  
-res.status(200).json({status:'Grp has been created'})
+res.status(200).json({status:'Grp has been created',admin:'true'})
 }
 catch(err){
    res.status(500).json({status:'Failed'});
  }
+}
+
+exports.updateGroup = async (req,res,next) =>{
+  const grpName = req.body.name;
+  const usr = req.body.user;
+  const admin = req.body.admin;
+ try{
+ const grp = await Group.findOne({where:{name:grpName}});
+ const allUser = await grp.getUsers();
+ const allUsr = [];
+ for(let i of allUser)
+  allUsr.push(i.name);
+
+ for(let i of usr){
+   const usr = await User.findOne({where:{name:i}})
+   if(!allUser.includes(i)){
+   if(admin.includes(i))
+    await grp.addUser(usr,{through:{admin:'true'}})
+    else
+    await grp.addUser(usr,{through:{admin:'false'}})
+   }
+  }
+  for(let i of allUsr){
+    const user = await User.findOne({where:{name:i}})
+    if(!usr.includes(i))
+    await grp.removeUser(user.id);
+  }
+ res.status(200).json({status:'Grp has been created'})
+ }
+ catch(err){
+    res.status(500).json({status:'Failed'});
+  }
+ }
+
+exports.getAllUserGroup = async (req,res,next) =>{
+  const grpName = req.query.grpname;
+  const userList =[];
+  const adminList = [];
+  const userAllList = [];
+  try{
+  const grp = await Group.findOne({where:{name:grpName}});
+  const allUser = await grp.getUsers();
+  const user = await User.findAll();
+  const admin = await grp.getUsers({through:{where:{admin:'true'}}});
+  for(let i of allUser)
+  userList.push(i.name);
+  for(let i of admin)
+  adminList.push(i.name);
+  for(let i of user)
+  userAllList.push(i.name);
+  res.status(200).json({admin:adminList, users:userList,allusers: userAllList});
+  }
+  catch(err){
+    res.status(500).json({status:'failed'});
+  }
+
 }
 
 exports.logOut = (req,res,next) =>{

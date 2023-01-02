@@ -93,7 +93,7 @@
             color: white;
             border: none;
             cursor: pointer;
-            margin:1vh;
+            margin-bottom:3vh;
             width: 10vw;
         }
         #group p{
@@ -104,10 +104,11 @@
             border: none;
             cursor: pointer;
             margin:1vh;
+            margin-bottom: 4vh;
             margin-left: 4vw;
             text-decoration: underline;
         }
-        #group-tab{
+        #group-tab,#setting-tab{
             display: none;
             position: absolute;
             width: 50vw;
@@ -117,15 +118,20 @@
              left: 25%;
              border-radius: 2vw;
         }
-         #group-tab > * {
+         #group-tab > *,#setting-tab > * {
             background-color: white;
             color: rgb(2, 74, 50);
          }
          #group-tab p{
             font-size: 3.8vh;
-            text-align: center; 
-         }
-         #group-tab input{
+            text-align: center;  
+        }
+        #setting-tab p{
+            font-size: 3vh;
+            text-align: center;
+            margin-bottom: 1vh;   
+        }
+         #group-tab input,#setting-tab input{
             width: 35vw;
             height: 4vh;
             font-size: 2.5vh;
@@ -158,13 +164,27 @@
             margin: 1vh 8vw;
             border-radius: 0.5vw;
         }
-        #users-list input{
+        #users-grp-list{
+            width: 35vw;
+            height: 20vh;
+            border: 0.1vw solid black;
+            margin: 1vh 8vw;
+            border-radius: 0.5vw;  
+        }
+        #users-admin-list{
+            width: 35vw;
+            height: 10vh;
+            border: 0.1vw solid black;
+            margin: 1vh 8vw;
+            border-radius: 0.5vw;  
+        }
+        #users-list input,#users-grp-list input,#users-admin-list input{
            height: 2.5vh;
            width: 1.5vw;
            margin: 2.5vh;
            margin-right: 0;
         }
-        #users-list label{
+        #users-list label,#users-grp-list label,#users-admin-list label{
             background-color: white;
             color: rgb(2, 74, 50);
             font-size: 2.5vh;
@@ -181,6 +201,19 @@
             width: 10vw;
             color: rgb(2, 74, 50);
             background-color: white;
+        }
+        #settings{
+            color: white;
+            width: 2vw;
+            color: rgb(2, 74, 50);
+            border: none;
+            cursor: pointer;
+            font-size: 3vh;
+            position: relative;
+            right:-59%;
+            top:-10%;
+            margin-top: -2vh;
+
         }
     </style>
 </head>
@@ -200,6 +233,7 @@
     <button id="send" name="send">SEND</button>
      </div>
      <div id="group-tab"></div>
+     <div id="setting-tab"></div>
     <script src="/js/home.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
