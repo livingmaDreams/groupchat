@@ -137,6 +137,7 @@ function getGrpSettings(event){
       labelEle.textContent=i;
       parDiv1.appendChild(labelEle);
     }
+    
    })
    .catch(err => console.log(err));
    
@@ -165,6 +166,7 @@ function getGrpSettings(event){
     })
     .catch(err => console.log(err));
     parDiv.style.display='none';
+    window.location.reload();
    })
 }
 
@@ -198,6 +200,7 @@ function getGroupChat(event){
 function printMessages(name,message){
   const div = document.createElement('div');
   div.id = 'user-messages-list';
+  
   div.innerHTML = `<span>${name}</span><span>${message}</span>`;
   document.getElementById('chat-room').appendChild(div);
 }

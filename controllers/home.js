@@ -6,14 +6,16 @@ exports.getHomePage = (req,res,next) => {
 
 const User = require('../models/user');
 const { Op } = require("sequelize");
+const aws = require('aws-sdk');
+
 
 
 exports.postMessage = async (req,res,next) =>{
   const grpName = req.body.grpName;
   const msg = req.body.msg;
   const id = req.user.id;
+    try{
 
-  try{
   const grp = await Group.findOne({where:{name:grpName}});
     await grp.createMessage({message:msg,userId:id});
    res.status(200).json({status:'success'})
@@ -94,7 +96,7 @@ for(let i of usr){
   const usr = await User.findOne({where:{name:i}})
    await grp.addUser(usr,{through:{admin:'false'}})
 }  
-res.status(200).json({status:'Grp has been created',admin:'true'})
+res.status(200).json({status:'Grp has been created'})
 }
 catch(err){
    res.status(500).json({status:'Failed'});
